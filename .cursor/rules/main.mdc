@@ -1,0 +1,697 @@
+---
+description: General rule about this repo being a sandbox for testing out Qiskit in python
+alwaysApply: false
+---
+# Qiskit Sandbox - Cursor Rules
+
+## Project Overview
+
+This is a **quantum computing learning sandbox** built around IBM's Qiskit framework. The project serves as a playground for testing, learning, and experimenting with quantum computing concepts and algorithms.
+
+### 🎯 Project Goals
+- **Learning**: Understand quantum computing fundamentals through hands-on examples
+- **Testing**: Experiment with different quantum algorithms and circuits
+- **Exploration**: Try both local simulation and IBM Cloud quantum hardware
+- **Documentation**: Maintain comprehensive examples and explanations
+
+### 🏗️ Architecture
+
+The project follows Qiskit's **four-step pattern** for quantum programs:
+1. **Map** problems to quantum-native format (circuits and operators)
+2. **Optimize** circuits for quantum hardware execution
+3. **Execute** using quantum primitives (Estimator, Sampler)
+4. **Analyze** results and post-process
+
+### 📁 Project Structure
+
+```
+qiskit-sandbox/
+├── README.md                 # Main project documentation
+├── requirements.txt          # Python dependencies
+├── test_setup.py            # Setup verification script
+├── hello_world_example.py    # Bell state example (fundamentals)
+├── qaoa_example.py          # QAOA optimization example (advanced)
+├── .cursorrules             # This file - project guidelines
+├── venv/                    # Python virtual environment
+└── *.png                    # Generated visualizations
+```
+
+## Development Guidelines
+
+### 🐍 Python Standards
+
+- **Python Version**: 3.10+ (Qiskit 2.1+ requirement)
+- **Virtual Environment**: Always use `venv/` for isolation
+- **Dependencies**: Keep `requirements.txt` updated with exact versions
+- **Imports**: Use explicit imports, avoid wildcard imports
+
+### 📝 Code Documentation
+
+**REQUIRED** for all Python files:
+- **File header**: Describe what the file does and its purpose
+- **Function docstrings**: Explain parameters, returns, and behavior
+- **Inline comments**: Clarify complex quantum operations
+- **Section comments**: Group related functionality
+
+**Example structure:**
+```python
+#!/usr/bin/env python3
+"""
+Brief description of what this file does
+Based on: [tutorial link if applicable]
+
+Key concepts demonstrated:
+- Concept 1
+- Concept 2
+- Concept 3
+"""
+
+# Imports with explanations
+from qiskit import QuantumCircuit  # Core circuit creation
+from qiskit.quantum_info import SparsePauliOp  # Quantum operators
+
+def function_name(param1, param2):
+    """
+    What this function does
+    
+    Args:
+        param1: Description of parameter
+        param2: Description of parameter
+        
+    Returns:
+        Description of return value
+        
+    Example:
+        How to use this function
+    """
+    # Implementation with comments
+    pass
+```
+
+### 🔧 Example Structure
+
+Every example should follow this pattern:
+
+1. **Setup and Imports**
+   - Clear import statements with comments
+   - Version compatibility notes
+   - Optional dependencies handling
+
+2. **Problem Definition**
+   - What problem are we solving?
+   - Classical vs quantum formulation
+   - Expected outcomes
+
+3. **Step 1: Map to Quantum**
+   - Circuit creation
+   - Operator definition
+   - Problem encoding
+
+4. **Step 2: Optimize**
+   - Circuit optimization
+   - Hardware-specific transpilation
+   - Error mitigation setup
+
+5. **Step 3: Execute**
+   - Local simulation implementation
+   - Cloud execution placeholder
+   - Primitive selection (Estimator/Sampler)
+
+6. **Step 4: Analyze**
+   - Result interpretation
+   - Visualization generation
+   - Performance metrics
+
+7. **Documentation**
+   - Expected outputs
+   - Generated files
+   - Next steps
+
+### 🌐 Local vs Cloud Execution
+
+**Always provide both options:**
+
+```python
+# For local simulation
+from qiskit.primitives import StatevectorEstimator as LocalEstimator
+
+# For cloud execution (commented out by default)
+# from qiskit_ibm_runtime import QiskitRuntimeService, EstimatorV2 as Estimator
+
+def execute_local(circuit, observables):
+    """Execute on local simulator"""
+    estimator = LocalEstimator()
+    # Implementation...
+
+def execute_cloud_placeholder(circuit, observables):
+    """Placeholder for IBM Cloud execution"""
+    print("To use IBM Cloud:")
+    print("1. Set up account")
+    print("2. Save credentials")
+    print("3. Uncomment cloud code")
+    # Placeholder implementation...
+```
+
+### 📊 Visualization and Output
+
+**Generate helpful outputs:**
+- **Console output**: Clear, formatted results
+- **Plots**: Optimization progress, circuit diagrams
+- **Images**: Graph visualizations, solution representations
+- **Files**: Save generated content with descriptive names
+
+**Example:**
+```python
+# Save visualizations with descriptive names
+plt.savefig("qaoa_optimization_progress.png")
+plt.close()
+print("Optimization plot saved as 'qaoa_optimization_progress.png'")
+```
+
+### 🧪 Testing and Verification
+
+**Include verification:**
+- **Setup tests**: Verify all dependencies work
+- **Example validation**: Check expected outputs
+- **Error handling**: Graceful failure with helpful messages
+- **Compatibility**: Test with different Python versions
+
+## Documentation Requirements
+
+### 📚 README Maintenance
+
+**CRITICAL**: Update README.md when making major changes:
+
+**What triggers README updates:**
+- ✅ Adding new examples
+- ✅ Changing dependencies
+- ✅ Modifying setup instructions
+- ✅ Adding new features
+- ✅ Updating IBM Cloud integration
+- ✅ Changing project structure
+
+**README sections to maintain:**
+1. **Quick Start** - Setup instructions
+2. **Examples** - Description of each example
+3. **IBM Cloud Integration** - Hardware execution setup
+4. **Development** - Project structure and guidelines
+5. **Learning Resources** - Links to tutorials and docs
+6. **Next Steps** - Suggestions for further exploration
+
+### 📝 Code Comments
+
+**Comment everything that's not immediately obvious:**
+
+```python
+# Good: Explain quantum concepts
+# Create Bell state: |00⟩ + |11⟩
+qc.h(0)  # Hadamard gate creates superposition
+qc.cx(0, 1)  # CNOT entangles the qubits
+
+# Good: Explain optimization choices
+# Use COBYLA optimizer for parameter optimization
+# COBYLA is derivative-free and works well with quantum circuits
+result = minimize(cost_function, initial_params, method="COBYLA")
+
+# Good: Explain data structures
+# Expectation values come as numpy arrays from StatevectorEstimator
+# Handle both scalar and array outputs for compatibility
+```
+
+### 🔍 Error Handling
+
+**Provide helpful error messages:**
+
+```python
+try:
+    import rustworkx as rx
+    RX_AVAILABLE = True
+except ImportError:
+    print("rustworkx not available. Install with: pip install rustworkx")
+    print("Graph visualization will be disabled.")
+    RX_AVAILABLE = False
+```
+
+## Quantum Computing Concepts
+
+### 🎓 Key Concepts to Document
+
+**Always explain these when relevant:**
+- **Qubits**: Quantum bits, superposition, measurement
+- **Quantum Gates**: Hadamard, CNOT, Pauli operators
+- **Entanglement**: Bell states, quantum correlations
+- **Measurement**: Expectation values, probability distributions
+- **Optimization**: Variational algorithms, cost functions
+- **Error Mitigation**: Noise, decoherence, error correction
+
+### 📖 Learning Progression
+
+**Structure examples for learning:**
+1. **Fundamentals** (hello_world_example.py)
+   - Basic quantum circuits
+   - Simple measurements
+   - Local simulation
+
+2. **Intermediate** (qaoa_example.py)
+   - Hybrid algorithms
+   - Optimization problems
+   - Parameter tuning
+
+3. **Advanced** (future examples)
+   - Complex algorithms
+   - Hardware-specific features
+   - Error mitigation
+
+## Maintenance Guidelines
+
+### 🔄 Regular Updates
+
+**Check monthly:**
+- Qiskit version compatibility
+- IBM Cloud API changes
+- New tutorial availability
+- Dependency updates
+
+### 🐛 Bug Fixes
+
+**When fixing bugs:**
+1. **Document the issue** in comments
+2. **Explain the fix** clearly
+3. **Update tests** if applicable
+4. **Check other examples** for similar issues
+
+### 🚀 Adding New Examples
+
+**When adding new examples:**
+1. **Follow the four-step pattern**
+2. **Include comprehensive documentation**
+3. **Provide both local and cloud options**
+4. **Generate helpful visualizations**
+5. **Update README.md**
+6. **Add to test_setup.py** if needed
+
+### 📈 Performance Considerations
+
+**Optimize for learning, not production:**
+- **Readability** over performance
+- **Clear explanations** over clever code
+- **Educational value** over optimization
+- **Compatibility** over cutting-edge features
+
+## IBM Cloud Integration
+
+### ☁️ Cloud Setup Guidelines
+
+**Always provide clear instructions:**
+1. **Account creation** steps
+2. **API token** generation
+3. **Credential saving** commands
+4. **Code modification** instructions
+5. **Usage limitations** and costs
+
+### 🔐 Security Notes
+
+**Security considerations:**
+- **Never commit** API tokens
+- **Use environment variables** for sensitive data
+- **Document** security best practices
+- **Warn** about usage limits
+
+## Final Notes
+
+### 🎯 Remember the Goal
+
+This is a **learning sandbox**, not a production system. Prioritize:
+- **Educational value**
+- **Clear explanations**
+- **Working examples**
+- **Comprehensive documentation**
+
+### 🤝 Contributing
+
+**When contributing:**
+- **Follow the established patterns**
+- **Add comprehensive documentation**
+- **Test thoroughly**
+- **Update README.md**
+- **Maintain backward compatibility**
+
+### 📞 Getting Help
+
+**Resources for help:**
+- [Qiskit Documentation](https://qiskit.org/documentation/)
+- [IBM Quantum Learning](https://learning.quantum.ibm.com/)
+- [Qiskit Textbook](https://qiskit.org/textbook/)
+- [IBM Quantum Platform](https://quantum.ibm.com/)
+
+---
+
+**Happy quantum computing! 🚀⚛️**
+
+Remember: The goal is to make quantum computing accessible and understandable through clear, well-documented examples that actually work. # Qiskit Sandbox - Cursor Rules
+
+## Project Overview
+
+This is a **quantum computing learning sandbox** built around IBM's Qiskit framework. The project serves as a playground for testing, learning, and experimenting with quantum computing concepts and algorithms.
+
+### 🎯 Project Goals
+- **Learning**: Understand quantum computing fundamentals through hands-on examples
+- **Testing**: Experiment with different quantum algorithms and circuits
+- **Exploration**: Try both local simulation and IBM Cloud quantum hardware
+- **Documentation**: Maintain comprehensive examples and explanations
+
+### 🏗️ Architecture
+
+The project follows Qiskit's **four-step pattern** for quantum programs:
+1. **Map** problems to quantum-native format (circuits and operators)
+2. **Optimize** circuits for quantum hardware execution
+3. **Execute** using quantum primitives (Estimator, Sampler)
+4. **Analyze** results and post-process
+
+### 📁 Project Structure
+
+```
+qiskit-sandbox/
+├── README.md                 # Main project documentation
+├── requirements.txt          # Python dependencies
+├── test_setup.py            # Setup verification script
+├── hello_world_example.py    # Bell state example (fundamentals)
+├── qaoa_example.py          # QAOA optimization example (advanced)
+├── .cursorrules             # This file - project guidelines
+├── venv/                    # Python virtual environment
+└── *.png                    # Generated visualizations
+```
+
+## Development Guidelines
+
+### 🐍 Python Standards
+
+- **Python Version**: 3.10+ (Qiskit 2.1+ requirement)
+- **Virtual Environment**: Always use `venv/` for isolation
+- **Dependencies**: Keep `requirements.txt` updated with exact versions
+- **Imports**: Use explicit imports, avoid wildcard imports
+
+### 📝 Code Documentation
+
+**REQUIRED** for all Python files:
+- **File header**: Describe what the file does and its purpose
+- **Function docstrings**: Explain parameters, returns, and behavior
+- **Inline comments**: Clarify complex quantum operations
+- **Section comments**: Group related functionality
+
+**Example structure:**
+```python
+#!/usr/bin/env python3
+"""
+Brief description of what this file does
+Based on: [tutorial link if applicable]
+
+Key concepts demonstrated:
+- Concept 1
+- Concept 2
+- Concept 3
+"""
+
+# Imports with explanations
+from qiskit import QuantumCircuit  # Core circuit creation
+from qiskit.quantum_info import SparsePauliOp  # Quantum operators
+
+def function_name(param1, param2):
+    """
+    What this function does
+    
+    Args:
+        param1: Description of parameter
+        param2: Description of parameter
+        
+    Returns:
+        Description of return value
+        
+    Example:
+        How to use this function
+    """
+    # Implementation with comments
+    pass
+```
+
+### 🔧 Example Structure
+
+Every example should follow this pattern:
+
+1. **Setup and Imports**
+   - Clear import statements with comments
+   - Version compatibility notes
+   - Optional dependencies handling
+
+2. **Problem Definition**
+   - What problem are we solving?
+   - Classical vs quantum formulation
+   - Expected outcomes
+
+3. **Step 1: Map to Quantum**
+   - Circuit creation
+   - Operator definition
+   - Problem encoding
+
+4. **Step 2: Optimize**
+   - Circuit optimization
+   - Hardware-specific transpilation
+   - Error mitigation setup
+
+5. **Step 3: Execute**
+   - Local simulation implementation
+   - Cloud execution placeholder
+   - Primitive selection (Estimator/Sampler)
+
+6. **Step 4: Analyze**
+   - Result interpretation
+   - Visualization generation
+   - Performance metrics
+
+7. **Documentation**
+   - Expected outputs
+   - Generated files
+   - Next steps
+
+### 🌐 Local vs Cloud Execution
+
+**Always provide both options:**
+
+```python
+# For local simulation
+from qiskit.primitives import StatevectorEstimator as LocalEstimator
+
+# For cloud execution (commented out by default)
+# from qiskit_ibm_runtime import QiskitRuntimeService, EstimatorV2 as Estimator
+
+def execute_local(circuit, observables):
+    """Execute on local simulator"""
+    estimator = LocalEstimator()
+    # Implementation...
+
+def execute_cloud_placeholder(circuit, observables):
+    """Placeholder for IBM Cloud execution"""
+    print("To use IBM Cloud:")
+    print("1. Set up account")
+    print("2. Save credentials")
+    print("3. Uncomment cloud code")
+    # Placeholder implementation...
+```
+
+### 📊 Visualization and Output
+
+**Generate helpful outputs:**
+- **Console output**: Clear, formatted results
+- **Plots**: Optimization progress, circuit diagrams
+- **Images**: Graph visualizations, solution representations
+- **Files**: Save generated content with descriptive names
+
+**Example:**
+```python
+# Save visualizations with descriptive names
+plt.savefig("qaoa_optimization_progress.png")
+plt.close()
+print("Optimization plot saved as 'qaoa_optimization_progress.png'")
+```
+
+### 🧪 Testing and Verification
+
+**Include verification:**
+- **Setup tests**: Verify all dependencies work
+- **Example validation**: Check expected outputs
+- **Error handling**: Graceful failure with helpful messages
+- **Compatibility**: Test with different Python versions
+
+## Documentation Requirements
+
+### 📚 README Maintenance
+
+**CRITICAL**: Update README.md when making major changes:
+
+**What triggers README updates:**
+- ✅ Adding new examples
+- ✅ Changing dependencies
+- ✅ Modifying setup instructions
+- ✅ Adding new features
+- ✅ Updating IBM Cloud integration
+- ✅ Changing project structure
+
+**README sections to maintain:**
+1. **Quick Start** - Setup instructions
+2. **Examples** - Description of each example
+3. **IBM Cloud Integration** - Hardware execution setup
+4. **Development** - Project structure and guidelines
+5. **Learning Resources** - Links to tutorials and docs
+6. **Next Steps** - Suggestions for further exploration
+
+### 📝 Code Comments
+
+**Comment everything that's not immediately obvious:**
+
+```python
+# Good: Explain quantum concepts
+# Create Bell state: |00⟩ + |11⟩
+qc.h(0)  # Hadamard gate creates superposition
+qc.cx(0, 1)  # CNOT entangles the qubits
+
+# Good: Explain optimization choices
+# Use COBYLA optimizer for parameter optimization
+# COBYLA is derivative-free and works well with quantum circuits
+result = minimize(cost_function, initial_params, method="COBYLA")
+
+# Good: Explain data structures
+# Expectation values come as numpy arrays from StatevectorEstimator
+# Handle both scalar and array outputs for compatibility
+```
+
+### 🔍 Error Handling
+
+**Provide helpful error messages:**
+
+```python
+try:
+    import rustworkx as rx
+    RX_AVAILABLE = True
+except ImportError:
+    print("rustworkx not available. Install with: pip install rustworkx")
+    print("Graph visualization will be disabled.")
+    RX_AVAILABLE = False
+```
+
+## Quantum Computing Concepts
+
+### 🎓 Key Concepts to Document
+
+**Always explain these when relevant:**
+- **Qubits**: Quantum bits, superposition, measurement
+- **Quantum Gates**: Hadamard, CNOT, Pauli operators
+- **Entanglement**: Bell states, quantum correlations
+- **Measurement**: Expectation values, probability distributions
+- **Optimization**: Variational algorithms, cost functions
+- **Error Mitigation**: Noise, decoherence, error correction
+
+### 📖 Learning Progression
+
+**Structure examples for learning:**
+1. **Fundamentals** (hello_world_example.py)
+   - Basic quantum circuits
+   - Simple measurements
+   - Local simulation
+
+2. **Intermediate** (qaoa_example.py)
+   - Hybrid algorithms
+   - Optimization problems
+   - Parameter tuning
+
+3. **Advanced** (future examples)
+   - Complex algorithms
+   - Hardware-specific features
+   - Error mitigation
+
+## Maintenance Guidelines
+
+### 🔄 Regular Updates
+
+**Check monthly:**
+- Qiskit version compatibility
+- IBM Cloud API changes
+- New tutorial availability
+- Dependency updates
+
+### 🐛 Bug Fixes
+
+**When fixing bugs:**
+1. **Document the issue** in comments
+2. **Explain the fix** clearly
+3. **Update tests** if applicable
+4. **Check other examples** for similar issues
+
+### 🚀 Adding New Examples
+
+**When adding new examples:**
+1. **Follow the four-step pattern**
+2. **Include comprehensive documentation**
+3. **Provide both local and cloud options**
+4. **Generate helpful visualizations**
+5. **Update README.md**
+6. **Add to test_setup.py** if needed
+
+### 📈 Performance Considerations
+
+**Optimize for learning, not production:**
+- **Readability** over performance
+- **Clear explanations** over clever code
+- **Educational value** over optimization
+- **Compatibility** over cutting-edge features
+
+## IBM Cloud Integration
+
+### ☁️ Cloud Setup Guidelines
+
+**Always provide clear instructions:**
+1. **Account creation** steps
+2. **API token** generation
+3. **Credential saving** commands
+4. **Code modification** instructions
+5. **Usage limitations** and costs
+
+### 🔐 Security Notes
+
+**Security considerations:**
+- **Never commit** API tokens
+- **Use environment variables** for sensitive data
+- **Document** security best practices
+- **Warn** about usage limits
+
+## Final Notes
+
+### 🎯 Remember the Goal
+
+This is a **learning sandbox**, not a production system. Prioritize:
+- **Educational value**
+- **Clear explanations**
+- **Working examples**
+- **Comprehensive documentation**
+
+### 🤝 Contributing
+
+**When contributing:**
+- **Follow the established patterns**
+- **Add comprehensive documentation**
+- **Test thoroughly**
+- **Update README.md**
+- **Maintain backward compatibility**
+
+### 📞 Getting Help
+
+**Resources for help:**
+- [Qiskit Documentation](https://qiskit.org/documentation/)
+- [IBM Quantum Learning](https://learning.quantum.ibm.com/)
+- [Qiskit Textbook](https://qiskit.org/textbook/)
+- [IBM Quantum Platform](https://quantum.ibm.com/)
+
+---
+
+**Happy quantum computing! 🚀⚛️**
+
+Remember: The goal is to make quantum computing accessible and understandable through clear, well-documented examples that actually work. 

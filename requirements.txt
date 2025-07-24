@@ -1,0 +1,25 @@
+# Qiskit Sandbox Dependencies
+# Python 3.12+ compatible packages
+# Core Qiskit framework with all extensions
+qiskit[all]~=2.1.1
+
+# IBM Cloud integration for quantum hardware access
+qiskit-ibm-runtime~=0.40.1
+
+# Scientific computing and optimization
+scipy>=1.5
+numpy>=1.17
+
+# Visualization and plotting
+matplotlib>=3.0
+seaborn>=0.9.0
+
+# Graph operations and visualization (for QAOA example)
+rustworkx>=0.15.0
+
+# Jupyter notebook support (optional)
+jupyter>=1.0.0
+
+# Additional useful packages
+pandas>=1.2.0
+sympy>=1.3.0 
